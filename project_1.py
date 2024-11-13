@@ -3,13 +3,17 @@ from langchain.schema import SystemMessage
 from langchain.chains import LLMChain
 #1 imports
 from langchain.prompts import ChatPromptTemplate, HumanMessagePromptTemplate, MessagesPlaceholder
-from langchain.memory import ConversationBufferMemory
+from langchain.memory import ConversationBufferMemory, FileChatMessageHistory
+
 
 llm= ChatOpenAI(model_name='gpt-3.5-turbo', temperature=1)
 
 #2 memory objects
+history = FileChatMessageHistory('chat_history.json')
+
 memory = ConversationBufferMemory(
     memory_key='chat_history',
+    chat_memory=history,
     return_messages= True
 )
 
@@ -28,7 +32,7 @@ chain= LLMChain(
     llm=llm,
     prompt=prompt,
     memory=memory,
-    verbose=False
+    verbose=True
 )
 
 while True:

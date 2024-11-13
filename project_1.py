@@ -1,3 +1,9 @@
+pip install -r ./requirements.txt -q
+
+import os
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv(), override=True)
+
 from langchain.chat_models import ChatOpenAI
 from langchain.schema import SystemMessage
 from langchain.chains import LLMChain
